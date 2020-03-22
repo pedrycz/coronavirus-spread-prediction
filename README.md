@@ -14,17 +14,23 @@ Max-squared-error cost function is responsible for calculating the difference be
 
 To minimize the cost function, the Approximate Bayesian Computation Sequential Monte Carlo (ABC SMC) algorithm implementation ([astroABC](https://github.com/pedrycz/astroABC)) was introduced with four parameters:
 ```
- s% - total affected population divided by total population
- i% - initially affected pupulation divided by total affected population
- b - illness rate from SIR model
- k - healing rate from SIR model
+s% - total affected population divided by total population
+i% - initially affected pupulation divided by total affected population
+b - illness rate from SIR model
+k - healing rate from SIR model
 ```
 Parameter distribution and other simulation properties can be adjusted in the code.
 
-## Requirements
-
- * [astroABC](https://github.com/pedrycz/astroABC) (forked from EliseJ and modified by me)
- * python, numpy, matplotlib
-
+## How to run
+```
+pip install numpy scipy matplotlib 
+git clone https://github.com/pedrycz/astroABC
+git clone https://github.com/pedrycz/coronavirus-spread-prediction
+cd coronavirus-spread-prediction
+python coronavirus.py
+```
 ## Examples
 
+ * Chinese data till 22.03.2020 predicted using data till 21.02.2020
+
+![obraz](https://user-images.githubusercontent.com/17498216/77261631-24fef300-6c90-11ea-8197-6a70f0de7ff8.png)
