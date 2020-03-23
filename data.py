@@ -4,7 +4,7 @@ def load_data(filename):
     """
     load data from text file with the following structure:
     0th line: total population
-    nth line: number of affected people in the nth day, number of infectious people in the nth day
+    nth line: number of total affected people in the nth day, number of infectious people in the nth day (total affected - dead - recovered)
     """
 
     filepath = "data/" + filename + ".txt"
