@@ -1,24 +1,24 @@
 import sys
 import matplotlib.pyplot as plt
-
+from sir import sir_simulate
+from data import load_data
 sys.path.append("../astroABC/astroabc") # path to https://github.com/pedrycz/astroABC (forked from EliseJ)
 from abc_class import *
 
-from sir import sir_simulate
-from data import load_data
-
 data_file = 'china'
-total_population, real_data_affected, real_data_infectious = load_data(data_file)
-real_data_size = len(real_data_affected)
 max_offset = 25
 days_to_verify = 30
 days_to_predict = 0
 
-# sampler helper returning the ratio of infectious and recovered people (steps_plus_offset - number of steps, p - SIR ABC parameters)
+total_population, real_data_affected, real_data_infectious = load_data("data/" + data_file + ".txt")
+real_data_size = len(real_data_affected)
+
+# sampler helper function returning the ratio of infectious and recovered people (p - SIR ABC parameters)
 def sir_sampler_helper(steps, p):
     Is, Rs = sir_simulate(steps, p[1], p[2], p[3])
     return np.multiply(Is, p[0]), np.multiply(Rs, p[0])
 
+# sampler returning the ratio of affected and infectious people (steps_plus_offset - number of steps, p - SIR ABC parameters)
 def coronavirus_simulate(p):
     Iratio, Rratio = sir_sampler_helper(steps_plus_offset, p)
     return np.add(Iratio, Rratio), Iratio
@@ -28,7 +28,7 @@ def coronavirus_simulate_affected(p):
     Iratio, Rratio = sir_sampler_helper(steps_plus_offset, p)
     return np.add(Iratio, Rratio)
 
-# sampler returning the ratio of infectious people (global `steps` parameter required, p - SIR ABC parameters)
+# sampler returning the ratio of infectious people (global `steps_plus_offset` parameter required, p - SIR ABC parameters)
 def coronavirus_simulate_infectious(p):
     Iratio, Rratio = sir_sampler_helper(steps_plus_offset, p)
     return Iratio

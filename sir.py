@@ -16,11 +16,11 @@ def sir_simulate(steps, I0, b, k):
 
     steps - number of days to simulate
     I0 - initially infected population rate
-    b - illness rate
-    k - healing rate
+    b - transition rate from S to I
+    k - transition rate from I to R
 
     Is - infected population rate by day
-    Rs - cured population rate by day
+    Rs - recovered population rate by day
     """
 
     Ss = np.empty((steps + 1))
